@@ -670,8 +670,10 @@ def main():
         print(wasd_interface._robot_state_task.proto)
         print("stand:")
         wasd_interface._stand()
+        time.sleep(10)
         print("stand via drive command:")
         wasd_interface._drive_cmd(DRIVE_COMMAND)
+        time.sleep(10)
         # try:
         # Prevent curses from introducing a 1 second delay for ESC key
         # os.environ.setdefault('ESCDELAY', '0')
