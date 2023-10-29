@@ -609,7 +609,7 @@ def main():
     import argparse 
 
     HOSTNAME = "192.168.50.3"
-    DRIVE_COMMAND = "f"  # stand
+    DRIVE_COMMAND = ord('f')  # stand
 
     parser = argparse.ArgumentParser()
     bosdyn.client.util.add_base_arguments(parser)
@@ -643,7 +643,8 @@ def main():
     # LOGGER.removeHandler(stream_handler)  # Don't use stream handler in curses mode.
 
     try:
-        # wasd_interface._drive_cmd(DRIVE_COMMAND)
+        print("estop state:")
+        print(wasd_interface._estop_str())
         print("toggle estop")
         wasd_interface._toggle_estop()
         print("power state:")
@@ -652,6 +653,8 @@ def main():
         wasd_interface._toggle_power()
         print("stand:")
         wasd_interface._stand()
+        print("stand via drive command:")
+        wasd_interface._drive_cmd(DRIVE_COMMAND)
         # try:
         # Prevent curses from introducing a 1 second delay for ESC key
         # os.environ.setdefault('ESCDELAY', '0')
