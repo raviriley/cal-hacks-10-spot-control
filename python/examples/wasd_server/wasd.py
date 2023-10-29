@@ -644,6 +644,13 @@ def main():
 
     try:
         # wasd_interface._drive_cmd(DRIVE_COMMAND)
+        print("toggle estop")
+        wasd_interface._toggle_estop()
+        print("power state:")
+        print(wasd_interface._power_state_str())
+        print("toggle power:")
+        wasd_interface._toggle_power()
+        print("stand:")
         wasd_interface._stand()
         # try:
         # Prevent curses from introducing a 1 second delay for ESC key
