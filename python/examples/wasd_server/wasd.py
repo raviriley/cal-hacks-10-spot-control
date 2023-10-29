@@ -643,7 +643,8 @@ def main():
     # LOGGER.removeHandler(stream_handler)  # Don't use stream handler in curses mode.
 
     try:
-        wasd_interface._drive_cmd(DRIVE_COMMAND)
+        # wasd_interface._drive_cmd(DRIVE_COMMAND)
+        wasd_interface._stand()
         # try:
         # Prevent curses from introducing a 1 second delay for ESC key
         # os.environ.setdefault('ESCDELAY', '0')
