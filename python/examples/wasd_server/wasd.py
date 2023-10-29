@@ -659,20 +659,18 @@ def main():
         else:
             # In case of some problems, e.g. somebody stole control over robot
             print("Power on failed")
+        # robot.time_sync.wait_for_sync()
 
-        print("power state:")
-        print(wasd_interface._power_state_str())
+        # print("power state:")
+        # print(wasd_interface._power_state_str())
         # print("toggle power:")
         # wasd_interface._toggle_power()
-        print("power state:")
-        print(wasd_interface._power_state_str())
-        print("robot state:\n")
-        print(wasd_interface._robot_state_task.proto)
+        # print("power state:")
+        # print(wasd_interface._power_state_str())
+        # print("robot state:\n")
+        # print(wasd_interface._robot_state_task.proto)
         print("stand:")
         wasd_interface._stand()
-        time.sleep(10)
-        print("stand via drive command:")
-        wasd_interface._drive_cmd(DRIVE_COMMAND)
         time.sleep(10)
         # try:
         # Prevent curses from introducing a 1 second delay for ESC key
