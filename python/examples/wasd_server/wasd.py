@@ -33,7 +33,7 @@ from bosdyn.client.image import ImageClient
 from bosdyn.client.lease import Error as LeaseBaseError
 from bosdyn.client.lease import LeaseClient, LeaseKeepAlive
 from bosdyn.client.power import PowerClient
-from bosdyn.client.robot_command import RobotCommandBuilder, RobotCommandClient
+from bosdyn.client.robot_command import RobotCommandBuilder, RobotCommandClient, blocking_command, blocking_stand, blocking_sit
 from bosdyn.client.robot_state import RobotStateClient
 from bosdyn.client.time_sync import TimeSyncError
 from bosdyn.util import duration_str, format_metric, secs_to_hms
@@ -42,7 +42,7 @@ LOGGER = logging.getLogger()
 
 VELOCITY_BASE_SPEED = 0.5  # m/s
 VELOCITY_BASE_ANGULAR = 0.8  # rad/sec
-VELOCITY_CMD_DURATION = 0.6  # seconds
+VELOCITY_CMD_DURATION = 2.4  # seconds
 COMMAND_INPUT_RATE = 0.1
 
 
@@ -244,7 +244,7 @@ class WasdInterface(object):
 
     def shutdown(self):
         """Release control of robot as gracefully as possible."""
-        LOGGER.info('Shutting down WasdInterface.')
+        print('Shutting down WasdInterface.')
         if self._estop_keepalive:
             # This stops the check-in thread but does not stop the robot.
             self._estop_keepalive.shutdown()
@@ -618,7 +618,7 @@ def main():
                         type=float)
     options = parser.parse_args()
 
-    options.hostname = HOSTNAME
+    # options.hostname = HOSTNAME
 
     # stream_handler = _setup_logging(options.verbose)
 
@@ -659,7 +659,16 @@ def main():
         else:
             # In case of some problems, e.g. somebody stole control over robot
             print("Power on failed")
-        # robot.time_sync.wait_for_sync()
+
+        # idk if this works yet
+        robot.time_sync.wait_for_sync()
+        command_client = robot.ensure_client(RobotCommandClient.default_service_name)
+        blocking_stand(command_client, timeout_sec=10)
+
+        wasd_interface._move_forward()
+        time.sleep(2)
+
+        blocking_sit(command_client, timeout_sec=10)
 
         # print("power state:")
         # print(wasd_interface._power_state_str())
