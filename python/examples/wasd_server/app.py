@@ -26,13 +26,18 @@ def initialize_robot():
 
     wasd_interface = WasdInterface(robot)
     try:
+        print("starting...")
         wasd_interface.start()
     except (ResponseError, RpcError) as err:
         print("Failed to initialize robot communication: %s", err)
         return False
 
     try:
+        print("robot state:")
+        print(wasd_interface.robot_state())
+        print("toggling estop")
         wasd_interface._toggle_estop()
+        print("toggling power")
         wasd_interface._toggle_power()
     except (ResponseError, RpcError) as err:
         print("Failed to toggle estop or power: %s", err)
