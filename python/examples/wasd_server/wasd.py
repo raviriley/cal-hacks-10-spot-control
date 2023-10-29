@@ -642,14 +642,6 @@ def main():
 
     # LOGGER.removeHandler(stream_handler)  # Don't use stream handler in curses mode.
 
-    robot.power_on(timeout_sec=20)
-    if robot.is_powered_on():
-        print("Powered On")
-		# If everything went smooth, Spot face lights should turn green
-    else:
-		# In case of some problems, e.g. somebody stole control over robot
-        print("Power on failed")
-
     try:
         print("robot state:\n")
         print(wasd_interface._robot_state_task.proto)
@@ -660,6 +652,14 @@ def main():
         wasd_interface._toggle_estop()
         print("estop state:")
         print(wasd_interface._estop_str())
+        robot.power_on(timeout_sec=20)
+        if robot.is_powered_on():
+            print("Powered On")
+            # If everything went smooth, Spot face lights should turn green
+        else:
+            # In case of some problems, e.g. somebody stole control over robot
+            print("Power on failed")
+
         print("power state:")
         print(wasd_interface._power_state_str())
         # print("toggle power:")
