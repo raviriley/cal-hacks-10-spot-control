@@ -656,6 +656,8 @@ def main():
         print(wasd_interface._power_state_str())
         print("toggle power:")
         wasd_interface._toggle_power()
+        print("power state:")
+        print(wasd_interface._power_state_str())
         print("robot state:\n")
         print(wasd_interface._robot_state_task.proto)
         print("stand:")
