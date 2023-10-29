@@ -650,6 +650,8 @@ def main():
         print(wasd_interface._estop_str())
         print("toggle estop")
         wasd_interface._toggle_estop()
+        print("estop state:")
+        print(wasd_interface._estop_str())
         print("power state:")
         print(wasd_interface._power_state_str())
         print("toggle power:")
