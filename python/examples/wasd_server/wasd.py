@@ -643,7 +643,9 @@ def main():
     # LOGGER.removeHandler(stream_handler)  # Don't use stream handler in curses mode.
 
     try:
-        print("robot state:\n", wasd_interface.robot_state())
+        print("robot state:\n")
+        print(wasd_interface._robot_state_task.proto)
+        # _robot_state_task.proto
         print("estop state:")
         print(wasd_interface._estop_str())
         print("toggle estop")
@@ -652,7 +654,8 @@ def main():
         print(wasd_interface._power_state_str())
         print("toggle power:")
         wasd_interface._toggle_power()
-        print("robot state:\n", wasd_interface.robot_state())
+        print("robot state:\n")
+        print(wasd_interface._robot_state_task.proto)
         print("stand:")
         wasd_interface._stand()
         print("stand via drive command:")
